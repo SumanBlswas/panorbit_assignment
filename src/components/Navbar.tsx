@@ -1,7 +1,28 @@
 import { Divider, Flex, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = ({ id }: { id: string }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const getActiveLink = () => {
+    if (currentPath.includes("/homepage/posts")) {
+      return "Posts";
+    } else if (currentPath.includes("/homepage/gallery")) {
+      return "Gallery";
+    } else if (currentPath.includes("/homepage/todo")) {
+      return "ToDo";
+    }
+    return "Profile";
+  };
+
+  const [activeLink, setActiveLink] = useState(getActiveLink());
+
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link);
+  };
+
   return (
     <Flex
       bgGradient={"linear(to bottom, #395bc8, #6039c8)"}
@@ -15,9 +36,9 @@ const Navbar = ({ id }: { id: string }) => {
         justify={"center"}
         align={"center"}
       >
-        <Link to={`/homepage/${id}`}>
+        <Link to={`/homepage/${id}`} onClick={() => handleLinkClick("Profile")}>
           <Text
-            color={"whiteAlpha.600"}
+            color={activeLink === "Profile" ? "white" : "whiteAlpha.600"}
             fontWeight={"semibold"}
             fontSize={"lg"}
           >
@@ -25,9 +46,12 @@ const Navbar = ({ id }: { id: string }) => {
           </Text>
         </Link>
         <Divider />
-        <Link to={`/homepage/posts/${id}`}>
+        <Link
+          to={`/homepage/posts/${id}`}
+          onClick={() => handleLinkClick("Posts")}
+        >
           <Text
-            color={"whiteAlpha.600"}
+            color={activeLink === "Posts" ? "white" : "whiteAlpha.600"}
             fontWeight={"semibold"}
             fontSize={"lg"}
           >
@@ -35,9 +59,12 @@ const Navbar = ({ id }: { id: string }) => {
           </Text>
         </Link>
         <Divider />
-        <Link to={`/homepage/gallery/${id}`}>
+        <Link
+          to={`/homepage/gallery/${id}`}
+          onClick={() => handleLinkClick("Gallery")}
+        >
           <Text
-            color={"whiteAlpha.600"}
+            color={activeLink === "Gallery" ? "white" : "whiteAlpha.600"}
             fontWeight={"semibold"}
             fontSize={"lg"}
           >
@@ -45,9 +72,12 @@ const Navbar = ({ id }: { id: string }) => {
           </Text>
         </Link>
         <Divider />
-        <Link to={`/homepage/todo/${id}`}>
+        <Link
+          to={`/homepage/todo/${id}`}
+          onClick={() => handleLinkClick("ToDo")}
+        >
           <Text
-            color={"whiteAlpha.600"}
+            color={activeLink === "ToDo" ? "white" : "whiteAlpha.600"}
             fontWeight={"semibold"}
             fontSize={"lg"}
           >

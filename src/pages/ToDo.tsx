@@ -15,7 +15,9 @@ const ToDo = ({ setId }: { setId: CallableFunction }) => {
       <Box pos={"absolute"} w={"75%"} top={14}>
         {id && <TitleNavbar id={id} page={page} />}
       </Box>
-      <ComingSoon />
+      <Box pos={"absolute"} w={"75%"}>
+        <ComingSoon />
+      </Box>
     </Flex>
   );
 };

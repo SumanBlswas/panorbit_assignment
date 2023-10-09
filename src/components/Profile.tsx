@@ -5,7 +5,7 @@ const Profile = ({ data }: { data: Users }) => {
   const arrayProfile = [
     { text: "Username", prop: data.username },
     { text: "e-mail", prop: data.email },
-    { text: "Phone", prop: data.phone },
+    { text: "Phone", prop: data.phone.replace("hotlink-ok", "") },
     { text: "Website", prop: data.website },
   ];
 
